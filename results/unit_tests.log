@@ -1,0 +1,19 @@
+test_candidate_copy_order_and_wheel_sign (reference_tests.ReferenceTests.test_candidate_copy_order_and_wheel_sign) ... ok
+test_coordinate_power_identity (reference_tests.ReferenceTests.test_coordinate_power_identity) ... ok
+test_eulerian_damping (reference_tests.ReferenceTests.test_eulerian_damping) ... ok
+test_force_load_scaling_moment (reference_tests.ReferenceTests.test_force_load_scaling_moment) ... ok
+test_invalid_inputs (reference_tests.ReferenceTests.test_invalid_inputs) ... ok
+test_memory (reference_tests.ReferenceTests.test_memory) ... ok
+test_no_transport_retains_endpoint_memory (reference_tests.ReferenceTests.test_no_transport_retains_endpoint_memory) ... ok
+test_partial_residence_inflow (reference_tests.ReferenceTests.test_partial_residence_inflow) ... ok
+test_pressure (reference_tests.ReferenceTests.test_pressure) ... ok
+test_pressure_changes_force_not_imposed_state (reference_tests.ReferenceTests.test_pressure_changes_force_not_imposed_state) ... ok
+test_signs_steady_combined_bound_and_symmetry (reference_tests.ReferenceTests.test_signs_steady_combined_bound_and_symmetry) ... ok
+test_transient_isotropic_norm_invariant (reference_tests.ReferenceTests.test_transient_isotropic_norm_invariant) ... ok
+test_zero_C_limit (reference_tests.ReferenceTests.test_zero_C_limit) ... ok
+test_zero_input (reference_tests.ReferenceTests.test_zero_input) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.105s
+
+OK

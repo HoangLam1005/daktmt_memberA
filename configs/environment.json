@@ -1,0 +1,9 @@
+{
+  "python": "3.12.4",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "dependencies": {
+    "numpy": "2.3.4",
+    "scipy": "1.16.3",
+    "matplotlib": "3.10.7"
+  }
+}

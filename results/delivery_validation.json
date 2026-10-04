@@ -1,0 +1,19 @@
+{
+  "finite_arrays": true,
+  "hashes_match": true,
+  "no_group_split_leakage": true,
+  "conservative_force_and_bristle_bounds": true,
+  "Excel_CSV_matching_rows": 43,
+  "counts": {
+    "pilot_reference.npz": {
+      "test": 4,
+      "train": 16,
+      "validation": 4
+    },
+    "datasets/candidate_reference.npz": {
+      "test": 6,
+      "train": 24,
+      "validation": 6
+    }
+  }
+}

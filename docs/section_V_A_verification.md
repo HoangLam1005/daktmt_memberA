@@ -1,0 +1,7 @@
+## V-A. Numerical reference verification (Member A contribution)
+
+The reference implementation passed 14 automated tests covering limiting cases, inflow residence, load normalization, sign conventions, state memory, Eulerian damping and candidate-state isolation. Spatial refinement reduced the tested field error by a factor of 38.88. A separate zero-transport temporal study reduced the error by 63.95 when the time step was reduced from 4 ms to 0.5 ms.
+
+An independently implemented upwind method-of-lines solver integrated with BDF produced a maximum force discrepancy of 0.062% of wheel load on the finest comparison grid. Each delivered pilot trajectory also passed its coarse/fine gate. The largest force discrepancies were 0.021% for prescribed-motion trajectories and 0.134% for braking candidates. These are empirical numerical comparisons, not rigorous error bounds.
+
+Pressure and memory ablations isolate one factor at a time. The full protocol, tolerances, grids and results are provided in [reference_verification_report.md](reference_verification_report.md) and the CSV logs. The source-conditioned cornering response is reconstructed separately; a digitized published-curve comparison and measurement-based validation remain unavailable. Consequently, the evidence supports numerical verification of the selected model, not validation of a specific robot tire or a closed-loop safety claim.

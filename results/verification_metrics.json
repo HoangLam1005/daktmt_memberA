@@ -1,0 +1,13 @@
+{
+  "unit_tests": 14,
+  "threshold_force_over_Fz": 0.02,
+  "space_error_ratio_coarse_to_fine": 38.881402142558926,
+  "time_error_ratio_coarse_to_fine": 63.94622314009094,
+  "independent_max_force_error_over_Fz": 0.0006172868050880967,
+  "max_discrete_load_error": 4.440892098500626e-16,
+  "history_initial_force_difference_N": 3833.3313979758277,
+  "G0": "PASS documented numerical model",
+  "G1": "PASS tested cases only; Member D review pending",
+  "G2": "PARTIAL: source conditions reconstructed; no digitized published-curve error",
+  "G3": "NOT_AVAILABLE: no tire measurements"
+}

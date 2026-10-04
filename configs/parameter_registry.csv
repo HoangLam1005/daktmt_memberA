@@ -1,0 +1,44 @@
+﻿symbol,name,value,unit,min,max,provenance,source,notes,sampling,module
+L,Contact length,0.303,m,0.15,0.4,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B,Literature tire; not measured robot,fixed,all
+Fz,Nominal wheel load,4000,N,2000,6000,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B,Load sweeps are declared sensitivity,sampled,"pressure,dataset"
+L_sigma0_x,Original longitudinal stiffness product,314000,N,,,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B,Preserve original L*sigma0 convention,fixed,conversion
+L_sigma0_y,Original lateral stiffness product,159200,N,,,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B,Preserve original L*sigma0 convention,fixed,conversion
+sigma0_x,Load-normalized longitudinal stiffness,259.0759075907591,1/m,150,500,derived,"https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Eqs.1-3, Appendix B",L_sigma0_x/(L*Fz_nominal); frozen under load sweeps,fixed,"PDE,force"
+sigma0_y,Load-normalized lateral stiffness,131.35313531353134,1/m,100,500,derived,"https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Eqs.1-3, Appendix B",L_sigma0_y/(L*Fz_nominal); frozen under load sweeps,fixed,"PDE,force"
+sigma1_x,Eulerian bristle damping,0,s/m,0,0.02,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B; https://dcsl.gatech.edu/papers/vsd04R.pdf Eq.2,Zero in base case; nonzero only in verification,fixed,force
+sigma1_y,Eulerian bristle damping,0,s/m,0,0.02,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B; https://dcsl.gatech.edu/papers/vsd04R.pdf Eq.2,Zero in base case; nonzero only in verification,fixed,force
+sigma2,Viscous coefficient,0,s/m,0,0.02,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B,Zero in base case,fixed,force
+mu_k,Kinetic friction,0.648,1,0.3,1.0,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B,Friction normalized by nominal Fz,fixed,PDE
+mu_s,Static friction,1.671,1,1,2,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B,Friction normalized by nominal Fz,fixed,PDE
+v_s,Stribeck velocity,3.49,m/s,1,6,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B,Friction normalized by nominal Fz,fixed,PDE
+gamma,Stribeck exponent,0.6,1,0.4,2,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B,Friction normalized by nominal Fz,fixed,PDE
+pressure_left,Trapezoid first breakpoint,0.134,1,0.05,0.3,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B,x_left/L,fixed,pressure
+pressure_right,Trapezoid second breakpoint,0.707,1,0.6,0.9,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Appendix B,x_right/L,fixed,pressure
+pressure_family,Selected normal load shape,trapezoid,category,,,design,https://dcsl.gatech.edu/papers/vsd04R.pdf Sec.4,Uniform/trapezoid/quartic; quartic=30*u^2*(1-u)^2 chosen here,sampled,pressure
+r,Rolling radius,0.3,m,0.1,0.4,design,model_spec.md design choice,Assumed interface radius; not from Appendix B,fixed,wheel
+Iw,Wheel rotational inertia,1.2,kg*m^2,0.1,2,design,model_spec.md design choice,Assumed single-wheel bench inertia,fixed,wheel
+actuator_tau,Brake lag time constant,0.02,s,0.01,0.1,design,model_spec.md design choice,Assumed first-order actuator,fixed,wheel
+brake_max,Maximum commanded brake torque,1200,N*m,0,1200,design,model_spec.md design choice,"Physical actuator limit, not force clamp",fixed,wheel
+brake_rate,Maximum brake torque slew,10000,N*m/s,1000,20000,design,model_spec.md design choice,Physical actuator limit,fixed,wheel
+Vx,Longitudinal wheel-centre velocity,8,m/s,2,20,design,model_spec.md design choice,Forward only; literature reproduction uses 60 km/h,fixed,dataset
+Vy,Lateral wheel-centre velocity,0.3,m/s,-2,2,design,model_spec.md design choice,Positive left; slip opposes Fy at equilibrium,fixed,dataset
+omega,Angular speed,26.666666666666668,rad/s,0,80,design,model_spec.md design choice,Positive forward rolling; reject reverse,fixed,wheel
+delta,Steering angle,0,rad,-0.5,0.5,design,model_spec.md design choice,Wheel-to-body rotation only; not solved tire input,fixed,vehicle interface
+v_slip_max,Sampled total slip speed ceiling,5,m/s,0,5,design,model_spec.md design choice,"Dataset design, not physical law",fixed,dataset
+speed_epsilon,Slip-ratio reporting denominator floor,0.1,m/s,0.01,0.2,design,model_spec.md design choice,Used for reported kappa only; never in PDE,fixed,interface
+nx,Reference grid nodes,257,count,65,1025,design,model_spec.md design choice,Includes both endpoints,fixed,solver
+dt_solver,Reference internal step,0.001,s,0.000125,0.004,design,model_spec.md design choice,Pilot design; refine to check each family,fixed,solver
+dt_control,Control interval,0.02,s,0.01,0.05,design,model_spec.md design choice,Assumed sample-and-hold command interval,fixed,"wheel,dataset"
+horizon,Single candidate horizon,0.02,s,0.01,0.05,design,model_spec.md design choice,Default matches dt_control,fixed,"wheel,dataset"
+duration,Kinematic trajectory duration,0.4,s,0.1,2,design,model_spec.md design choice,Numerical pilot; not stopping-distance run,fixed,dataset
+seed,Random seed,20261003,integer,,,design,model_spec.md design choice,Deterministic pilot sampling,fixed,dataset
+n_trajectories,Kinematic pilot trajectories,24,count,,,design,model_spec.md design choice,"16 train, 4 validation, 4 test groups",fixed,dataset
+n_wheel_trajectories,Candidate benchmark trajectories,12,count,,,design,model_spec.md design choice,"8 train, 2 validation, 2 test groups",fixed,dataset
+rtol,MOL BDF relative tolerance,1e-08,1,,,design,model_spec.md design choice,Independent verification tolerance,fixed,independent
+atol,MOL BDF absolute state tolerance,1e-11,m,,,design,model_spec.md design choice,Independent verification tolerance,fixed,independent
+force_gate,Fine/coarse maximum force error divided by Fz,0.02,1,,,design,model_spec.md design choice,Predetermined numerical acceptance; not ML accuracy guarantee,fixed,verification
+state_gate,RMS field error divided by mu_s/min(sigma0),0.03,1,,,design,model_spec.md design choice,Predetermined numerical acceptance,fixed,verification
+rom_kappa_min,ROM closure search lower bound,0.2,1,,,design,model_spec.md design choice,Calibration on training excitations only,fixed,ROM
+rom_kappa_max,ROM closure search upper bound,5,1,,,design,model_spec.md design choice,Calibration on training excitations only,fixed,ROM
+literature_speed,Deur reference speed,16.666666666666668,m/s,,,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Fig.4 / Appendix B,60 km/h to SI,fixed,literature
+literature_angle,Deur Fig.4 slip-angle step,1,degree,,,published,https://skoge.folk.ntnu.no/prost/proceedings/ifac2002/data/content/00284/284.pdf Fig.4 / Appendix B,0 to 1 degree at t=0.05 s,fixed,literature

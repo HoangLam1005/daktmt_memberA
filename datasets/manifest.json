@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "generated_local_date": "2026-10-03",
+  "generated_utc": "2026-10-03T11:21:26.951669+00:00",
+  "seed": 20261003,
+  "solver_version": "A-moc-1.0.0",
+  "dtype": "float64",
+  "parameter_registry_sha256": "0ac5b8500224cd1601d99dbbccfaffd55edd9ff0cc752fac5e1d478a7ab885d1",
+  "model_spec_sha256": "89087f94881f7275c5ffdb71f1b1e9184aed5c8da238cb337fa064210f8b4b6c",
+  "solver_sha256": "84d2734298d510d7f485106169f275513e6bf0b14e8bc134f74300ddeb5e7d86",
+  "code_sha256": {
+    "parameters.py": "472b2c3c93bdee98be0cc2ab202f95098bbc73aef9fc91a4a7dd8d8da91ee37c",
+    "pressure.py": "34dce69ac9cb0f3faa288e298d53952f7e7649daef4c4fa042007f692df2f4ad",
+    "wheel_interface.py": "30e008f8ddb9ff78ea2d6e2d917e6afb497c2c438557be9c71a99a962c6543f3",
+    "generate_reference.py": "df1c3f7e23fcb408b86c6db780039c87d63f2542e17b795bcba4b3a7ce09f3b0"
+  },
+  "python": "3.12.14",
+  "numpy": "2.5.3",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "nx": 257,
+  "dt_solver": 0.001,
+  "kinematic_trajectories": 24,
+  "candidate_examples": 36,
+  "quality": "verified_reference",
+  "qualification": "G0/G1 numerical only; no external review or experimental validation",
+  "initialization": "analytic steady field; never reset per frame",
+  "split_policy": "group by trajectory before windowing; all candidate siblings same split",
+  "future_information": "kinematic wave parameters must be predictor inputs; candidate data uses held causal boundary",
+  "max_kinematic_refinement_error_over_Fz": 0.00021129975319876852,
+  "max_candidate_refinement_error_over_Fz": 0.0013418873135510382,
+  "files": {
+    "pilot_reference.npz": "8a67f5e7152a39cbf32277b9660312a8de7436769aa5cc29ca47983036ee67be",
+    "datasets\\candidate_reference.npz": "c9b61d8da61e996994ed9ea7a1b6390f785d47e56fe38fed6c49ce566635a63a",
+    "datasets\\kinematic_configs.json": "810d46ce1a68d2e0cdb245793d2ed300e39ccd561b0a564337ad32cedc2166a8",
+    "datasets\\candidate_metadata.json": "0d1e5dc5e3501885e709aecd9427477c6caa3d40d70744cbc0427335532cb233",
+    "datasets\\quality_checks.json": "64ecdb4bc53e4755a6857910dc3f2f590d8df0f3ab783e130ea75de38dfdcef2"
+  }
+}

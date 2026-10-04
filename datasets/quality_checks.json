@@ -1,0 +1,242 @@
+[
+  {
+    "case_id": "kin_000",
+    "split": "train",
+    "max_force_error_over_Fz": 0.00010694763186777047,
+    "normalized_state_RMS": 1.5936820951223473e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_001",
+    "split": "train",
+    "max_force_error_over_Fz": 0.00010870285162868474,
+    "normalized_state_RMS": 2.236534112454246e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_002",
+    "split": "train",
+    "max_force_error_over_Fz": 0.00013902216408014445,
+    "normalized_state_RMS": 4.293498440507201e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_003",
+    "split": "train",
+    "max_force_error_over_Fz": 0.00011877612706532879,
+    "normalized_state_RMS": 1.6504393688236196e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_004",
+    "split": "train",
+    "max_force_error_over_Fz": 4.0163593783928495e-05,
+    "normalized_state_RMS": 7.085193692019917e-06,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_005",
+    "split": "train",
+    "max_force_error_over_Fz": 0.00011780852321453037,
+    "normalized_state_RMS": 1.6843303657647927e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_006",
+    "split": "train",
+    "max_force_error_over_Fz": 0.0001280549436069713,
+    "normalized_state_RMS": 1.8481600259525938e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_007",
+    "split": "train",
+    "max_force_error_over_Fz": 0.00018005921089923811,
+    "normalized_state_RMS": 2.4020597354973223e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_008",
+    "split": "train",
+    "max_force_error_over_Fz": 0.00012685601382591492,
+    "normalized_state_RMS": 2.6804764552297753e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_009",
+    "split": "train",
+    "max_force_error_over_Fz": 6.479061969791014e-05,
+    "normalized_state_RMS": 1.1286810764552635e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_010",
+    "split": "train",
+    "max_force_error_over_Fz": 0.00010036441528506491,
+    "normalized_state_RMS": 2.1821889037312088e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_011",
+    "split": "train",
+    "max_force_error_over_Fz": 0.0001541449766109148,
+    "normalized_state_RMS": 1.8307002381003146e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_012",
+    "split": "train",
+    "max_force_error_over_Fz": 0.000172545085038988,
+    "normalized_state_RMS": 6.317748808269794e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_013",
+    "split": "train",
+    "max_force_error_over_Fz": 3.220617409471568e-05,
+    "normalized_state_RMS": 6.288629690833344e-06,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_014",
+    "split": "train",
+    "max_force_error_over_Fz": 0.00013940586211841444,
+    "normalized_state_RMS": 2.0154991823269948e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_015",
+    "split": "train",
+    "max_force_error_over_Fz": 0.00017513101745966934,
+    "normalized_state_RMS": 2.50194942004448e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_016",
+    "split": "validation",
+    "max_force_error_over_Fz": 4.709599007598698e-05,
+    "normalized_state_RMS": 9.492502430370523e-06,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_017",
+    "split": "validation",
+    "max_force_error_over_Fz": 9.816103201771916e-05,
+    "normalized_state_RMS": 2.233866991775486e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_018",
+    "split": "validation",
+    "max_force_error_over_Fz": 4.9457448555528195e-05,
+    "normalized_state_RMS": 7.857317177314326e-06,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_019",
+    "split": "validation",
+    "max_force_error_over_Fz": 0.00021129975319876852,
+    "normalized_state_RMS": 2.283633863405478e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_020",
+    "split": "test",
+    "max_force_error_over_Fz": 7.77258889115204e-05,
+    "normalized_state_RMS": 1.3182254551568977e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_021",
+    "split": "test",
+    "max_force_error_over_Fz": 0.00013309303249234883,
+    "normalized_state_RMS": 1.5535389394299482e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_022",
+    "split": "test",
+    "max_force_error_over_Fz": 6.243165043857798e-05,
+    "normalized_state_RMS": 1.2469303303513553e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  },
+  {
+    "case_id": "kin_023",
+    "split": "test",
+    "max_force_error_over_Fz": 0.0001604595470640163,
+    "normalized_state_RMS": 2.6801825012766565e-05,
+    "clamp_events": 0,
+    "out_of_domain": false,
+    "quality": "verified_reference",
+    "scope": "G0/G1 numerical pilot"
+  }
+]

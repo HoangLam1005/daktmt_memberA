@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sổ tay Bàn giao Nhiệm vụ Member A · Distributed LuGre</title>
+  <style>
+    :root {
+      --ink: #152d40;
+      --teal: #007f82;
+      --teal-light: #e6f4f5;
+      --muted: #5b6d7b;
+      --border: #dce5eb;
+      --bg: #eef2f6;
+      --card-bg: #ffffff;
+      --pass: #0d824d;
+      --pass-bg: #eafaf1;
+      --warn: #b26a00;
+      --warn-bg: #fdf6ea;
+      --navy: #153246;
+      --navy-light: #23556b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 26px; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.7 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    }
+    nav {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: 275px;
+      background: var(--navy);
+      color: white;
+      padding: 28px 20px;
+      overflow-y: auto;
+      z-index: 100;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    nav strong {
+      font-size: 20px;
+      display: block;
+      line-height: 1.35;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+    nav .nav-subtitle {
+      font-size: 12px;
+      color: #8bb5c7;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 22px;
+      display: block;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      padding-bottom: 12px;
+    }
+    nav a {
+      display: block;
+      padding: 8px 10px;
+      color: #cbe4eb;
+      text-decoration: none;
+      font-size: 13.5px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+      transition: all 0.15s ease;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.1);
+      color: #ffffff;
+      padding-left: 14px;
+    }
+    nav .nav-group-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #7195a6;
+      margin-top: 18px;
+      margin-bottom: 6px;
+      padding-left: 6px;
+      font-weight: 600;
+    }
+    main {
+      margin-left: 275px;
+      padding: 35px 45px;
+      max-width: 1360px;
+    }
+    section {
+      background: var(--card-bg);
+      padding: 38px 46px;
+      margin-bottom: 28px;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(22, 50, 77, 0.05);
+      border: 1px solid rgba(220, 229, 235, 0.6);
+    }
+    h1 {
+      font-size: 28px;
+      line-height: 1.3;
+      margin: 0 0 20px;
+      color: var(--navy);
+    }
+    h2 {
+      font-size: 22px;
+      margin: 34px 0 16px;
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+      color: var(--ink);
+    }
+    h3 {
+      font-size: 17px;
+      color: var(--teal);
+      margin-top: 24px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    a { color: #006b86; text-decoration: none; overflow-wrap: anywhere; }
+    a:hover { text-decoration: underline; }
+    p, li { max-width: 95ch; color: #2c4354; }
+    ul, ol { padding-left: 24px; }
+    li { margin-bottom: 6px; }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 22px 0;
+    }
+    th {
+      background: #e8f1f4;
+      text-align: left;
+      color: var(--navy);
+      font-weight: 600;
+    }
+    td, th {
+      border-bottom: 1px solid #dae3e9;
+      padding: 11px 14px;
+      vertical-align: top;
+    }
+    tr:nth-child(even) { background: #f8fafc; }
+    tr:hover { background: #f0f5f8; }
+    code {
+      font-family: Consolas, 'Fira Code', Menlo, Monaco, monospace;
+      font-size: .88em;
+      background: #f1f5f8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #0b4968;
+    }
+    pre {
+      background: #182c3c;
+      color: #dbe8ef;
+      padding: 20px 24px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      font-family: Consolas, monospace;
+      font-size: 13.5px;
+      line-height: 1.55;
+      overflow-x: auto;
+    }
+    pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+    blockquote {
+      border-left: 4px solid var(--teal);
+      margin: 20px 0;
+      padding: 10px 20px;
+      background: var(--teal-light);
+      border-radius: 0 8px 8px 0;
+    }
+    .tag {
+      font-size: 11.5px;
+      letter-spacing: .12em;
+      color: #627784;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .badge-pass { background: var(--pass-bg); color: var(--pass); border: 1px solid #b5e8cb; }
+    .badge-info { background: #e6f1f8; color: #0c6291; border: 1px solid #bad6e8; }
+    .badge-warn { background: var(--warn-bg); color: var(--warn); border: 1px solid #f6deb6; }
+    .cover {
+      background: linear-gradient(130deg, #122838 0%, #1e4b60 60%, #165b6e 100%);
+      color: white;
+      border: none;
+      padding: 48px 50px;
+    }
+    .cover h1 { font-size: 36px; color: white; margin-bottom: 14px; }
+    .cover p { font-size: 17px; color: #d6e8f0; max-width: 85ch; margin-bottom: 12px; }
+    .cover .tag { color: #8ec3d6; }
+    .cover .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 26px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .meta-item strong { display: block; font-size: 12px; text-transform: uppercase; color: #8ec3d6; }
+    .meta-item span { font-size: 15px; font-weight: 600; color: #ffffff; }
+    .task-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 18px;
+      background: #fafbfc;
+      transition: all 0.2s ease;
+    }
+    .task-card:hover {
+      background: #ffffff;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      border-color: #b0c9d8;
+    }
+    .task-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .task-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 0;
+    }
+    .task-deliverable {
+      font-size: 13px;
+      color: var(--teal);
+      font-weight: 600;
+    }
+    .eq-box {
+      background: #f7fafc;
+      border: 1px solid #d8e4ec;
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+      color: #12344d;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media(max-width: 980px) {
+      nav { position: static; width: auto; }
+      nav a { display: inline-block; margin-right: 12px; }
+      main { margin: 0; padding: 20px; }
+      section { padding: 25px 20px; }
+      table { display: block; overflow-x: auto; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    @media print {
+      nav { display: none; }
+      main { margin: 0; padding: 0; }
+      section { box-shadow: none; border-radius: 0; border: none; padding: 0; margin-bottom: 40px; }
+      body { background: white; font-size: 10pt; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <strong>Sổ tay Member A</strong>
+  <span class="nav-subtitle">Handoff · LuGre Phân Bố</span>
+  
+  <div class="nav-group-title">Điều hướng chính</div>
+  <a href="#overview">Tổng quan gói bàn giao</a>
+  <a href="#tasks">10 Nhiệm vụ (A01–A10)</a>
+  <a href="#cross-cutting">4 Trách nhiệm xuyên suốt</a>
+  <a href="#equations">Hệ phương trình A1–A9</a>
+  <a href="#verification">Kiểm chứng số & Gates</a>
+  <a href="#datasets">Dữ liệu Pilot (B & C)</a>
+  <a href="#team-handoff">Hướng dẫn B / C / D</a>
+  <a href="#execution">Cách chạy & Pipeline</a>
+  <a href="#files">Bảng tra cứu toàn bộ tệp</a>
+</nav>
+
+<main>
+
+<!-- COVER SECTION -->
+<section class="cover">
+  <div class="tag">Bộ bàn giao nghiên cứu hoàn chỉnh · Task Member A</div>
+  <h1>Mô hình LuGre Phân Bố, Áp Suất Tiếp Xúc & Bộ Giải Tham Chiếu</h1>
+  <p>Tài liệu điều hướng toàn diện cho gói công việc của Thành viên A: từ nền tảng lý thuyết phương trình đạo hàm riêng (PDE), phân bố tải trọng tiếp xúc, phương pháp đặc trưng (MoC), kiểm chứng chéo số học đến đóng gói dữ liệu phục vụ mạng nơ-ron PINN và mô phỏng điều khiển phanh ô tô.</p>
+  
+  <div class="meta-grid">
+    <div class="meta-item">
+      <strong>Phiên bản</strong>
+      <span>A-moc-1.0.0</span>
+    </div>
+    <div class="meta-item">
+      <strong>Ngày khóa thiết kế</strong>
+      <span>03/10/2026</span>
+    </div>
+    <div class="meta-item">
+      <strong>Tiến độ hoàn thành</strong>
+      <span><span class="badge badge-pass">10 / 10 Task PASS</span></span>
+    </div>
+    <div class="meta-item">
+      <strong>Ngôn ngữ & Chuẩn</strong>
+      <span>Python 3.12 · float64 · SI</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1: TỔNG QUAN -->
+<section id="overview">
+  <div class="tag">Phần 1 / 8</div>
+  <h1>1. Tổng quan vị trí và vai trò của Member A</h1>
+  <p>Trong hệ thống nghiên cứu dự đoán lực lốp và điều khiển phương tiện (ZOCBF/SIL), <strong>Member A</strong> chịu trách nhiệm xây dựng <strong>Ground Truth vật lý số học (Numerical Reference Ground Truth)</strong>. Mô hình lốp LuGre phân bố được chọn vì mô tả được <em>hiệu ứng nhớ lịch sử biến dạng cao su</em> dọc theo vệt tiếp xúc và <em>ảnh hưởng của các hình dạng phân bố tải trọng áp suất khác nhau</em>.</p>
+
+  <div class="grid-2">
+    <div>
+      <h3>Các trụ cột kỹ thuật của Member A</h3>
+      <ul>
+        <li><strong>Vệt tiếp xúc 1D, Biến dạng 2D:</strong> Chiều dài vệt tiếp xúc $x \in [0, L]$, trạng thái sợi cao su 2 chiều $(z_x, z_y)$.</li>
+        <li><strong>Phương pháp giải đặc trưng (MoC):</strong> Cập nhật trạng thái biến dạng dọc theo đường đặc trưng bằng nghiệm mũ chính xác, không dùng các ngưỡng cắt kẹp (*no state/force clipping*).</li>
+        <li><strong>Phân bố áp suất chuẩn hóa:</strong> Hỗ trợ 3 họ phân bố (Uniform, Trapezoid, Quartic), tích phân bảo toàn tuyệt đối tải trọng thẳng đứng $F_z$.</li>
+        <li><strong>Kiểm chứng số hai lớp:</strong> Kiểm tra chéo với bộ giải độc lập Upwind MOL + SciPy BDF.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Mối liên kết với các thành viên khác</h3>
+      <ul>
+        <li><strong>Member B (PINN & ML):</strong> Cung cấp bộ dữ liệu huấn luyện động học (24 trajectory) và ứng viên phanh (36 snapshot) kèm hợp đồng dữ liệu chuẩn hóa.</li>
+        <li><strong>Member C (Vehicle Dynamics & Braking):</strong> Cung cấp giao diện động lực học quay bánh xe <code>reference_step</code> và các phép chuyển đổi hệ tọa độ thân xe - bánh xe.</li>
+        <li><strong>Member D (Verification & Audit):</strong> Cung cấp nhật ký kiểm thử, kết quả hội tụ không gian/thời gian và tiêu chuẩn nghiệm thu G0–G3.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: 10 NHIỆM VỤ A01 - A10 -->
+<section id="tasks">
+  <div class="tag">Phần 2 / 8</div>
+  <h1>2. Chi tiết 10 nhiệm vụ chính (A01 – A10)</h1>
+  <p>Dưới đây là chi tiết yêu cầu, giải pháp đã triển khai và sản phẩm tương ứng của từng nhiệm vụ trong kế hoạch của Member A:</p>
+
+  <!-- A01 -->
+  <div class="task-card">
+    <div class="task-header">
+      <h3 class="task-title">A01 — Xác định phạm vi bài toán và các giả thiết</h3>
+      <span class="badge badge-pass">ĐÃ HOÀN THÀNH</span>
+    </div>
+    <div class="task-deliverable">Tệp kết quả: <a href="model_spec.md">model_spec.md</a> (Mục A01–A02)</div>
+    <p>Chốt mô hình vật lý: Distributed LuGre 1D không gian ($x \in [0, L]$ từ mép trước inflow đến mép sau outflow), 2D trạng thái sợi cao su $(z_x, z_y)$. Giữ lại: vận chuyển theo phương dọc $a = |r\omega|$, Stribeck phi tuyến, áp suất không đều và mô-men tự định hướng $M_z$. Bỏ qua: camber, đàn hồi thân bánh, nhiệt độ, nước, và độ biến thiên áp suất theo bề rộng ngang. Toàn bộ lực được tính tác dụng lên bánh xe/thân xe.</p>
+  </div>
+
+  <!-- A02 -->
+  <div class="task-card">
+    <div class="task-header">
+      <h3 class="task-title">A02 — Đọc tài liệu và chọn mô hình Distributed LuGre phù hợp</h3>
+      <span class="badge badge-pass">ĐÃ HOÀN THÀNH</span>
+    </div>
+    <div class="task-deliverable">Tệp kết quả: <a href="source_audit.md">source_audit.md</a> &amp; <a href="model_spec.md">model_spec.md</a></div>
+    <p>Đối chiếu mô hình LuGre phân bố với LuGre tập trung (Point LuGre). Trích xuất phương trình cấu trúc từ <em>Tsiotras et al. (2004)</em> và bộ tham số thực nghiệm/kịch bản kích thích từ <em>Deur (2002)</em>. Thiết lập quy tắc chuẩn hóa độ cứng chia theo tải trọng danh định $F_{z0}$ để đảm bảo tính nhất quán thứ nguyên khi giải bằng phương pháp đặc trưng (MoC).</p>
+  </div>
+
+  <!-- A03 -->
+  <div class="task-card">
+    <div class="task-header">
+      <h3 class="task-title">A03 — Đặc tả toàn bộ phương trình vật lý (A1–A9)</h3>
+      <span class="badge badge-pass">ĐÃ HOÀN THÀNH</span>
+    </div>
+    <div class="task-deliverable">Tệp kết quả: <a href="model_spec.md">model_spec.md</a> (Phương trình A1–A9)</div>
+    <p>Viết hoàn chỉnh hệ phương trình toán lý: từ động học vận tốc trượt $v_r$, hàm Stribeck $g(s)$, hệ số suy giảm $C_i$, phương trình PDE vận chuyển - phản ứng, điều kiện biên mép vào ($z(0,t)=0$ khi $a>0$), ứng suất ma sát có giảm chấn Eulerian damping $\sigma_1 \partial_t z$, chuẩn hóa áp suất $p(x)$, tích phân lực/mô-men $F_x, F_y, M_z$, đến công thức giải tích MoC.</p>
+  </div>
+
+  <!-- A04 -->
+  <div class="task-card">
+    <div class="task-header">
+      <h3 class="task-title">A04 — Xây dựng Parameter Registry (Bảng tham số vật lý)</h3>
+      <span class="badge badge-pass">ĐÃ HOÀN THÀNH</span>
+    </div>
+    <div class="task-deliverable">Tệp kết quả: <a href="parameter_registry.csv">parameter_registry.csv</a>, <a href="parameter_registry.xlsx">parameter_registry.xlsx</a>, <a href="parameters.py">parameters.py</a></div>
+    <p>Khóa <strong>43 tham số vật lý</strong> trong một nguồn chân lý duy nhất (CSV). Bao gồm đầy đủ symbol, tên, giá trị, đơn vị SI, khoảng giá trị [min, max], xuất xứ (provenance), nguồn tài liệu tham khảo và module sử dụng. File Excel được tạo đồng bộ 100% để người đọc thẩm định. Module Python <code>parameters.py</code> tự động kiểm tra tính hợp lệ và chặn giá trị âm/vô hạn.</p>
+  </div>
+
+  <!-- A05 -->
+  <div class="task-card">
+    <div class="task-header">
+      <h3 class="task-title">A05 — Xây dựng mô hình phân bố áp suất vùng tiếp xúc</h3>
+      <span class="badge badge-pass">ĐÃ HOÀN THÀNH</span>
+    </div>
+    <div class="task-deliverable">Tệp kết quả: <a href="pressure.py">pressure.py</a>, <a href="contact_patch.png">contact_patch.png</a></div>
+    <p>Cài đặt 3 họ hàm phân bố tải pháp tuyến: <strong>Uniform</strong> (đều), <strong>Trapezoid</strong> (hình thang bất đối xứng của Deur), và <strong>Quartic</strong> (đa thức đối xứng $\text{Beta}(3,3)$). Đảm bảo $p(x) \ge 0$ và tích phân số học đạt sai số chuẩn hóa $< 4.4 \times 10^{-16}$. Xuất đồ thị minh họa trực quan vệt tiếp xúc và các dạng tải.</p>
+  </div>
+
+  <!-- A06 -->
+  <div class="task-card">
+    <div class="task-header">
+      <h3 class="task-title">A06 — Xây dựng Reference Solver cho Distributed LuGre</h3>
+      <span class="badge badge-pass">ĐÃ HOÀN THÀNH</span>
+    </div>
+    <div class="task-deliverable">Tệp kết quả: <a href="reference_solver.py">reference_solver.py</a> (Lớp <code>ReferenceSolver</code>)</div>
+    <p>Hiện thực bộ giải số tham chiếu phiên bản <code>A-moc-1.0.0</code> chuẩn <code>float64</code> bằng Semi-Lagrangian MoC. Cập nhật nghiệm hàm mũ ổn định qua toán tử $\phi(q) = -\text{expm1}(-q)/q$, triệt tiêu lỗi chia cho 0 khi $C_i \to 0$. Đảm bảo không sử dụng bất kỳ cơ chế kẹp cắt lực (*clamping*) nhân tạo nào.</p>
+  </div>
+
+  <!-- A07 -->
+  <div class="task-card">
+    <div class="task-header">
+      <h3 class="task-title">A07 — Thực hiện các kiểm thử cơ bản &amp; Verification</h3>
+      <span class="badge badge-pass">ĐÃ HOÀN THÀNH</span>
+    </div>
+    <div class="task-deliverable">Tệp kết quả: <a href="reference_tests.py">reference_tests.py</a>, <a href="pilot_reference.npz">pilot_reference.npz</a>, <a href="independent_solver.py">independent_solver.py</a></div>
+    <p>Bộ 14 bài kiểm thử đơn vị tự động đạt 100% PASS: kiểm tra zero-input, tiệm cận $C_i \to 0$, bảo toàn biến dạng khi xe đứng yên ($a=0$), điều kiện biên inflow, tính đối xứng và chặn lực Coulomb, hiệu ứng nhớ biến dạng cao su, và kiểm tra công suất. Bộ giải độc lập bằng phương pháp đường Upwind MOL + BDF đạt độ đồng thuận với MoC ở mức sai số chỉ $0.062\% F_z$.</p>
+  </div>
+
+  <!-- A08 -->
+  <div class="task-card">
+    <div class="task-header">
+      <h3 class="task-title">A08 — Viết phần bài báo thuộc trách nhiệm của Member A</h3>
+      <span class="badge badge-pass">ĐÃ HOÀN THÀNH</span>
+    </div>
+    <div class="task-deliverable">Tệp kết quả: <a href="section_II_B.md">section_II_B.md</a>, <a href="section_III_A_physics.md">section_III_A_physics.md</a>, <a href="section_V_A_verification.md">section_V_A_verification.md</a></div>
+    <p>Hoàn thành 3 bản thảo bằng tiếng Anh chuẩn học thuật: Section II-B (Cơ học tiếp xúc phân bố và bộ nhớ lốp), Section III-A (Mô hình vật lý tham chiếu và chuyển trạng thái nhân quả), và Section V-A (Kiểm chứng số nghiệm tham chiếu). Tất cả công thức và ký hiệu đều khớp 1:1 với code triển khai.</p>
+  </div>
+
+  <!-- A09 -->
+  <div class="task-card">
+    <div class="task-header">
+      <h3 class="task-title">A09 — Tổng hợp và báo cáo kết quả kiểm chứng</h3>
+      <span class="badge badge-pass">ĐÃ HOÀN THÀNH</span>
+    </div>
+    <div class="task-deliverable">Tệp kết quả: <a href="reference_verification_report.md">reference_verification_report.md</a></div>
+    <p>Báo cáo thẩm định kỹ thuật số đầy đủ, trình bày kết quả chạy thực nghiệm: tỷ lệ giảm sai số không gian (38.88 lần), tỷ lệ giảm sai số thời gian (63.95 lần), phân tích độ nhạy tham số ($\pm 20\%$), mô hình bậc rút gọn ROM (hiệu chuẩn $\kappa = 1.209$), thí nghiệm kiểm chứng bộ nhớ biến dạng và thí nghiệm kiểm chứng phân bố áp suất. Chỉ rõ các giới hạn vật lý và trường hợp dễ thất bại của mô hình.</p>
+  </div>
+
+  <!-- A10 -->
+  <div class="task-card">
+    <div class="task-header">
+      <h3 class="task-title">A10 — Chuẩn hóa và bàn giao toàn bộ cho nhóm</h3>
+      <span class="badge badge-pass">ĐÃ HOÀN THÀNH</span>
+    </div>
+    <div class="task-deliverable">Tệp kết quả: <a href="handoff_A.md">handoff_A.md</a>, <a href="data_schema.md">data_schema.md</a>, <a href="delivery_manifest.json">delivery_manifest.json</a></div>
+    <p>Đóng gói toàn bộ sản phẩm: hợp đồng dữ liệu chuẩn hóa, hướng dẫn bàn giao chuyên biệt cho Member B, C và D, tài liệu hướng dẫn chạy nhanh, và mã băm SHA-256 niêm phong toàn vẹn của tất cả các file trong gói bàn giao.</p>
+  </div>
+</section>
+
+<!-- SECTION 3: 4 TRÁCH NHIỆM XUYÊN SUỐT -->
+<section id="cross-cutting">
+  <div class="tag">Phần 3 / 8</div>
+  <h1>3. Bốn trách nhiệm xuyên suốt của Member A</h1>
+  <p>Ngoài 10 nhiệm vụ chính A01–A10, Member A còn đảm nhận 4 trách nhiệm liên kết hệ thống xuyên suốt:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 28%;">Trách nhiệm</th>
+        <th style="width: 32%;">Giải pháp &amp; Sản phẩm đã làm</th>
+        <th style="width: 40%;">Ý nghĩa đối với dự án</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Audit implementation hiện có</strong><br>(<code>src/sil/physics.py</code>, <code>lugre_ground_truth.py</code>)</td>
+        <td>Xây dựng <strong>Checklist audit 7 bước cụ thể</strong> trong <a href="source_audit.md">source_audit.md</a>; ghi nhận trung thực trạng thái hoãn audit do chưa có file mã nguồn trong workspace.</td>
+        <td>Đảm bảo tính liêm chính khoa học: không tự ý giả định mã nguồn cũ là đạt chuẩn; có ngay quy trình kiểm tra đối chiếu khi mã nguồn xe/SIL xuất hiện.</td>
+      </tr>
+      <tr>
+        <td><strong>2. Sinh Ground Truth Data cho PINN</strong> (Member B)</td>
+        <td>Sinh 24 chuỗi động học (<a href="pilot_reference.npz">pilot_reference.npz</a>) và 36 mẫu ứng viên phanh (<a href="datasets/candidate_reference.npz">datasets/candidate_reference.npz</a>) kèm metadata đầy đủ.</td>
+        <td>Cung cấp dữ liệu chuẩn độ chính xác cao đã qua kiểm định lưới mịn (*coarse/fine gate*), phân chia train/val/test độc lập theo trajectory để chống rò rỉ dữ liệu.</td>
+      </tr>
+      <tr>
+        <td><strong>3. Cung cấp REF/ROM &amp; các Ablation</strong></td>
+        <td>Mô hình chuẩn REF, mô hình thu gọn ROM 2 trạng thái (<a href="rom.py">rom.py</a>, <a href="rom_calibration.json">rom_calibration.json</a>), Memory ablation và Pressure ablation.</td>
+        <td>Giúp nhóm có cơ sở khoa học để trả lời phản biện: chứng minh giá trị của việc giữ lịch sử biến dạng lốp và phân bố áp suất so với các mô hình đơn giản hóa.</td>
+      </tr>
+      <tr>
+        <td><strong>4. Kiểm tra tính vật lý phần Member C</strong> (Vehicle Dynamics &amp; Control)</td>
+        <td>Xây dựng giao diện <a href="wheel_interface.py">wheel_interface.py</a> (ghép động lực học quay bánh, trễ cơ cấu phanh) và tài liệu <a href="member_C_integration.md">member_C_integration.md</a>.</td>
+        <td>Đảm bảo việc ghép lực lốp vào thân xe bảo toàn công suất, đúng chiều dấu phanh, từ chối an toàn các trường hợp bánh bị khóa hoặc đảo chiều.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SECTION 4: HỆ PHƯƠNG TRÌNH A1 - A9 -->
+<section id="equations">
+  <div class="tag">Phần 4 / 8</div>
+  <h1>4. Đặc tả hệ phương trình vật lý (A1 – A9)</h1>
+  <p>Hệ phương trình cốt lõi được định nghĩa trong <a href="model_spec.md">model_spec.md</a> và hiện thực chính xác trong <a href="reference_solver.py">reference_solver.py</a>:</p>
+
+  <div class="eq-box">
+    <strong>(A1) Động học vận tốc trượt &amp; Vận tốc vận chuyển:</strong><br>
+    v_r = [V_x - r·ω,  V_y]^T, &nbsp;&nbsp;&nbsp; s = ||v_r||_2, &nbsp;&nbsp;&nbsp; a = |r·ω|
+  </div>
+
+  <div class="eq-box">
+    <strong>(A2) Đường cong ma sát Stribeck phi tuyến:</strong><br>
+    g(s) = μ_k + (μ_s - μ_k) · exp( -(s / v_s)^γ )
+  </div>
+
+  <div class="eq-box">
+    <strong>(A3) Hệ số suy giảm biến dạng dọc &amp; ngang:</strong><br>
+    C_i(s) = σ_0i · s / g(s), &nbsp;&nbsp;&nbsp; với i ∈ {x, y}
+  </div>
+
+  <div class="eq-box">
+    <strong>(A4) Phương trình vi phân đạo hàm riêng (PDE Distributed LuGre):</strong><br>
+    ∂_t z_i + a · ∂_x z_i = v_ri - C_i · z_i
+  </div>
+
+  <div class="eq-box">
+    <strong>(A5) Điều kiện đầu &amp; Điều kiện biên mép vào vệt tiếp xúc:</strong><br>
+    z_i(x, 0) = z_i0(x); &nbsp;&nbsp;&nbsp; z_i(0, t) = 0 &nbsp; khi a > 0
+  </div>
+
+  <div class="eq-box">
+    <strong>(A6) Hệ số ma sát cục bộ &amp; Mật độ lực tiếp tuyến (kèm Eulerian damping):</strong><br>
+    μ_i(x,t) = -[ σ_0i · z_i + σ_1i · ∂_t z_i + σ_2 · v_ri ], &nbsp;&nbsp;&nbsp; q_i(x,t) = p(x,t) · μ_i(x,t) &nbsp; [N/m]
+  </div>
+
+  <div class="eq-box">
+    <strong>(A7) Chuẩn hóa tải trọng pháp tuyến (3 dạng phân bố):</strong><br>
+    p(x) = F_z · h(x/L) / ∫ h(u) du &nbsp;&nbsp; (Uniform: h=1; Trapezoid: Deur; Quartic: 30·u²·(1-u)²)
+  </div>
+
+  <div class="eq-box">
+    <strong>(A8) Tích phân lực tiếp tuyến &amp; Mô-men tự định hướng:</strong><br>
+    F_i = ∫_0^L q_i(x) dx, &nbsp;&nbsp;&nbsp; M_z = ∫_0^L (L/2 - x) · q_y(x) dx
+  </div>
+
+  <div class="eq-box">
+    <strong>(A9) Thuật toán cập nhật dọc theo đường đặc trưng (MoC):</strong><br>
+    dζ/dt = a; &nbsp;&nbsp;&nbsp; z_i^{n+1} = z_{i,foot} · e^{-C_i h} + v_ri · h · φ(C_i h), &nbsp;&nbsp; φ(q) = -expm1(-q) / q
+  </div>
+</section>
+
+<!-- SECTION 5: KẾT QUẢ KIỂM CHỨNG & THẨM ĐỊNH -->
+<section id="verification">
+  <div class="tag">Phần 5 / 8</div>
+  <h1>5. Bằng chứng kiểm chứng số liệu &amp; Thẩm định (G0–G3)</h1>
+  <p>Toàn bộ số liệu dưới đây được trích xuất từ nhật ký thực chạy của hệ thống và lưu trong thư mục <a href="results/">results/</a>:</p>
+
+  <h3>5.1 Đánh giá mức độ bằng chứng theo chuẩn NASA/AIAA</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Mức</th>
+        <th>Tiêu chí</th>
+        <th>Kết quả đạt được</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>G0</strong></td>
+        <td>Phương trình, thứ nguyên, quy ước dấu và xuất xứ tham số</td>
+        <td><span class="badge badge-pass">PASS</span> Toàn bộ 43 tham số có nguồn rõ ràng; phương trình A1–A9 nhất quán.</td>
+      </tr>
+      <tr>
+        <td><strong>G1</strong></td>
+        <td>Độ chính xác thuật toán số học, hội tụ lưới và kiểm thử tự động</td>
+        <td><span class="badge badge-pass">PASS</span> 14/14 unit test đạt; hội tụ lưới không gian và thời gian được chứng minh.</td>
+      </tr>
+      <tr>
+        <td><strong>G2</strong></td>
+        <td>Tái dựng thí nghiệm từ tài liệu công bố</td>
+        <td><span class="badge badge-info">PARTIAL</span> Tái dựng điều kiện Hình 4 (Deur 2002); chưa có dữ liệu số hóa trực tiếp từ hình gốc để tính RMSE.</td>
+      </tr>
+      <tr>
+        <td><strong>G3</strong></td>
+        <td>Xác thực bằng dữ liệu đo thực nghiệm lốp thật</td>
+        <td><span class="badge badge-warn">NOT AVAILABLE</span> Chưa có thiết bị đo lốp robot thực tế (đã khai báo rõ trong phạm vi).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>5.2 Bảng hội tụ lưới không gian (dt = 0.0002 s)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Số nút $n_x$</th>
+        <th>Bước lưới $\Delta x$ (mm)</th>
+        <th>Sai số RMS trường biến dạng (m)</th>
+        <th>Sai số lực / Tải đứng $F_z$</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>65</td><td>4.734</td><td>2.112 × 10⁻⁵</td><td>0.00718</td></tr>
+      <tr><td>129</td><td>2.367</td><td>8.488 × 10⁻⁶</td><td>0.00288</td></tr>
+      <tr><td>257 (Chuẩn)</td><td>1.184</td><td>2.087 × 10⁻⁶</td><td>0.00071</td></tr>
+      <tr><td>513</td><td>0.592</td><td>5.431 × 10⁻⁷</td><td>0.00018</td></tr>
+    </tbody>
+  </table>
+  <p><em>Kết luận:</em> Sai số trường giảm <strong>38.88 lần</strong> khi tinh lưới từ 65 lên 513 nút (xem đồ thị <a href="figures/convergence.png">figures/convergence.png</a>).</p>
+
+  <h3>5.3 So sánh chéo với Solver độc lập (Upwind MOL + SciPy BDF)</h3>
+  <p>Tại độ phân giải lưới mịn nhất, độ sai lệch lực cực đại giữa thuật toán đặc trưng (MoC) và phương pháp đường độc lập chỉ là <strong>0.0617% $F_z$</strong> (nhỏ hơn rất nhiều so với ngưỡng chấp nhận $2\% F_z$).</p>
+</section>
+
+<!-- SECTION 6: BỘ DỮ LIỆU PILOT -->
+<section id="datasets">
+  <div class="tag">Phần 6 / 8</div>
+  <h1>6. Bộ dữ liệu tham chiếu bàn giao (Pilot Datasets)</h1>
+  <p>Theo hợp đồng dữ liệu trong <a href="data_schema.md">data_schema.md</a>, Member A cung cấp 2 bộ dữ liệu nhị phân NumPy (không dùng Python pickle không an toàn):</p>
+
+  <div class="grid-2">
+    <div class="task-card">
+      <h3 class="task-title">1. Chuỗi động học (<a href="pilot_reference.npz">pilot_reference.npz</a>)</h3>
+      <p><strong>Dung lượng:</strong> ~37.2 MB · <strong>Quy mô:</strong> 24 chuỗi dao động ngẫu nhiên.</p>
+      <ul>
+        <li><code>z</code>: Mảng <code>(24, T, 257, 2)</code> lưu toàn bộ lịch sử phân bố sợi cao su.</li>
+        <li><code>force</code>: Mảng <code>(24, T, 2)</code> lực dọc và ngang $[F_x, F_y]$.</li>
+        <li><code>Mz</code>: Mảng <code>(24, T)</code> mô-men tự định hướng.</li>
+        <li><code>split</code>: Phân chia <strong>16 train / 4 validation / 4 test</strong> theo trajectory.</li>
+      </ul>
+    </div>
+
+    <div class="task-card">
+      <h3 class="task-title">2. Ứng viên phanh (<a href="datasets/candidate_reference.npz">candidate_reference.npz</a>)</h3>
+      <p><strong>Dung lượng:</strong> ~148 KB · <strong>Quy mô:</strong> 36 ví dụ phanh đơn bước.</p>
+      <ul>
+        <li><code>z0, z_next</code>: Trạng thái lốp đầu và cuối bước điều khiển.</li>
+        <li><code>omega</code>: Tốc độ góc bánh xe dưới tác động mô-men phanh.</li>
+        <li><code>force_impulse</code>: Xung lực tích phân $\int \mathbf{F} dt$ dùng cho điều khiển.</li>
+        <li><code>split</code>: Phân chia <strong>24 train / 6 validation / 6 test</strong> (cùng snapshot ở cùng split).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: HƯỚNG DẪN CHO MEMBER B, C, D -->
+<section id="team-handoff">
+  <div class="tag">Phần 7 / 8</div>
+  <h1>7. Hướng dẫn bàn giao chuyên biệt (Member B, C, D)</h1>
+  <p>Trích xuất từ biên bản bàn giao <a href="handoff_A.md">handoff_A.md</a>:</p>
+
+  <h3>Dành cho Member B (PINN &amp; Surrogate Models)</h3>
+  <ul>
+    <li>Sử dụng <code>pilot_reference.npz</code> để phát triển mô hình học biểu diễn trường biến dạng/bộ nhớ và <code>candidate_reference.npz</code> cho bài toán phanh một bước.</li>
+    <li><strong>Ràng buộc nhân quả:</strong> Khi mạng dự đoán tương lai, bắt buộc phải nhận tham số kích thích tương lai (tần số, biên độ) làm đầu vào. Tuyệt đối không đưa $\omega$ hoặc lực tương lai vào đặc trưng đầu vào.</li>
+    <li>Giữ nguyên phân chia train/val/test theo trajectory trước khi cắt sliding windows để chống rò rỉ dữ liệu.</li>
+  </ul>
+
+  <h3>Dành cho Member C (Vehicle Dynamics &amp; Braking Control)</h3>
+  <ul>
+    <li>Tham khảo tài liệu <a href="member_C_integration.md">member_C_integration.md</a>. Sử dụng hàm <code>reference_step</code> trong <a href="wheel_interface.py">wheel_interface.py</a>.</li>
+    <li>Hàm nhận bản sao độc lập của trạng thái lốp cho từng lệnh phanh ứng viên; chỉ ghi nhận (*commit*) trạng thái lốp của lệnh phanh thực tế được bộ điều khiển lựa chọn.</li>
+    <li>Giao diện hiện tại từ chối an toàn các trường hợp $\omega \le 0$ (bánh xe bị khóa hoàn toàn hoặc đảo chiều). Member C cần xây dựng mô hình khóa bánh riêng ở tầng mô hình xe.</li>
+  </ul>
+
+  <h3>Dành cho Member D (Verification &amp; Quality Audit)</h3>
+  <ul>
+    <li>Chạy lệnh kiểm thử tự động <code>python run_all.py</code>.</li>
+    <li>Kiểm tra các tệp minh chứng: <code>results/unit_tests.log</code> (14/14 test pass), <code>results/delivery_validation.json</code> và các bảng CSV hội tụ.</li>
+    <li>Đánh giá các cổng nghiệm thu trước khi thử nghiệm đóng vòng trên hệ thống xe đầy đủ.</li>
+  </ul>
+</section>
+
+<!-- SECTION 8: CÁCH CHẠY & PIPELINE -->
+<section id="execution">
+  <div class="tag">Phần 8 / 8</div>
+  <h1>8. Hướng dẫn thực thi &amp; Ví dụ sử dụng API</h1>
+
+  <h3>Chạy toàn bộ quy trình tái lập (Run All Pipeline)</h3>
+  <pre><code># 1. Kích hoạt môi trường Python 3.12
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+
+# 2. Chạy toàn bộ pipeline kiểm chứng, sinh dữ liệu và xuất báo cáo
+.\.venv\Scripts\python.exe run_all.py</code></pre>
+
+  <h3>Ví dụ gọi API trực tiếp trong mã nguồn Python</h3>
+  <pre><code>from parameters import default_parameters
+from reference_solver import ReferenceSolver
+from wheel_interface import WheelState, HeldBoundary, reference_step
+
+# Nạp tham số chuẩn và khởi tạo bộ giải 257 nút
+p = default_parameters()
+solver = ReferenceSolver(p, nx=257)
+z0 = solver.zero_state()
+
+# Đánh giá một bước phanh ứng viên (horizon = 0.02s, command = 200 Nm)
+wheel = WheelState(omega=8.0 / p.r, brake_torque=0.0)
+boundary = HeldBoundary(Vx=8.0, Vy=0.2, Fz=4000.0, pressure_family="trapezoid")
+
+result = reference_step(solver, z0, wheel, candidate_command=200.0,
+                        boundary=boundary, horizon=0.02, dt_solver=0.001)
+
+print("Lực lốp tại cuối bước (N):", result['force'][-1])
+print("Xung lực tích phân (N.s):", result['force_impulse'])
+z_next = result['next_tire_state']  # Chỉ commit nếu lệnh này được xe áp dụng thực tế</code></pre>
+</section>
+
+<!-- SECTION 9: BẢNG TRA CỨU FILE -->
+<section id="files">
+  <div class="tag">Tra cứu nhanh</div>
+  <h1>9. Bảng phân loại toàn bộ tệp trong thư mục</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Tệp / Đường dẫn</th>
+        <th>Loại</th>
+        <th>Chức năng &amp; Nội dung chính</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><a href="README.md">README.md</a></td><td>Markdown</td><td>Hướng dẫn thiết lập môi trường, chạy pipeline và ví dụ API.</td></tr>
+      <tr><td><a href="handoff_A.md">handoff_A.md</a></td><td>Markdown</td><td>Biên bản bàn giao chính thức của Member A cho Member B, C, D.</td></tr>
+      <tr><td><a href="model_spec.md">model_spec.md</a></td><td>Markdown</td><td>Đặc tả toán học đầy đủ các phương trình LuGre phân bố A1–A9.</td></tr>
+      <tr><td><a href="source_audit.md">source_audit.md</a></td><td>Markdown</td><td>Đối chiếu nguồn tài liệu Deur/Tsiotras và checklist audit mã nguồn.</td></tr>
+      <tr><td><a href="data_schema.md">data_schema.md</a></td><td>Markdown</td><td>Hợp đồng cấu trúc dữ liệu mảng NPZ, metadata và quy tắc phân chia tập.</td></tr>
+      <tr><td><a href="member_C_integration.md">member_C_integration.md</a></td><td>Markdown</td><td>Hướng dẫn tích hợp động lực học quay bánh xe cho Member C.</td></tr>
+      <tr><td><a href="reference_verification_report.md">reference_verification_report.md</a></td><td>Markdown</td><td>Báo cáo tổng hợp số liệu kiểm chứng định lượng G0–G3.</td></tr>
+      <tr><td><a href="section_II_B.md">section_II_B.md</a></td><td>Markdown</td><td>Bản thảo mục II-B bài báo (Cơ học tiếp xúc phân bố).</td></tr>
+      <tr><td><a href="section_III_A_physics.md">section_III_A_physics.md</a></td><td>Markdown</td><td>Bản thảo mục III-A bài báo (Mô hình vật lý tham chiếu).</td></tr>
+      <tr><td><a href="section_V_A_verification.md">section_V_A_verification.md</a></td><td>Markdown</td><td>Bản thảo mục V-A bài báo (Kiểm chứng số tham chiếu).</td></tr>
+      <tr><td><a href="parameter_registry.csv">parameter_registry.csv</a></td><td>CSV</td><td>Bảng 43 tham số vật lý - Nguồn chân lý duy nhất (Single Authority).</td></tr>
+      <tr><td><a href="parameter_registry.xlsx">parameter_registry.xlsx</a></td><td>Excel</td><td>Phiên bản bảng tính trực quan dùng cho người đọc và hội đồng duyệt.</td></tr>
+      <tr><td><a href="parameters.py">parameters.py</a></td><td>Python</td><td>Nạp và xác thực tính hợp lệ của tham số lốp từ registry.</td></tr>
+      <tr><td><a href="pressure.py">pressure.py</a></td><td>Python</td><td>Mô hình tính tải pháp tuyến đường $p(x)$ cho 3 dạng phân bố áp suất.</td></tr>
+      <tr><td><a href="reference_solver.py">reference_solver.py</a></td><td>Python</td><td>Bộ giải tham chiếu chính MoC (Semi-Lagrangian).</td></tr>
+      <tr><td><a href="wheel_interface.py">wheel_interface.py</a></td><td>Python</td><td>Giao diện ghép động lực học bánh xe và cơ cấu phanh.</td></tr>
+      <tr><td><a href="independent_solver.py">independent_solver.py</a></td><td>Python</td><td>Bộ giải độc lập kiểm chứng chéo (Upwind MOL + SciPy BDF).</td></tr>
+      <tr><td><a href="rom.py">rom.py</a></td><td>Python</td><td>Mô hình bậc rút gọn (ROM) 2 trạng thái làm đối chứng tốc độ.</td></tr>
+      <tr><td><a href="verification.py">verification.py</a></td><td>Python</td><td>Script chạy toàn bộ các bài toán đo hội tụ và phân tích độ nhạy.</td></tr>
+      <tr><td><a href="reference_tests.py">reference_tests.py</a></td><td>Python</td><td>Bộ 14 bài kiểm thử đơn vị tự động (Unit Tests).</td></tr>
+      <tr><td><a href="generate_reference.py">generate_reference.py</a></td><td>Python</td><td>Script sinh 24 chuỗi động học và 36 mẫu ứng viên phanh.</td></tr>
+      <tr><td><a href="make_figures.py">make_figures.py</a></td><td>Python</td><td>Script tự động vẽ 6 biểu đồ khoa học xuất ra thư mục figures/.</td></tr>
+      <tr><td><a href="build_report.py">build_report.py</a></td><td>Python</td><td>Script tổng hợp các file kết quả CSV thành báo cáo Markdown.</td></tr>
+      <tr><td><a href="validate_delivery.py">validate_delivery.py</a></td><td>Python</td><td>Script tự động kiểm tra tính toàn vẹn và hợp lệ trước bàn giao.</td></tr>
+      <tr><td><a href="run_all.py">run_all.py</a></td><td>Python</td><td>Master script tự động hóa chạy toàn bộ pipeline.</td></tr>
+      <tr><td><a href="pilot_reference.npz">pilot_reference.npz</a></td><td>NumPy</td><td>Bộ dữ liệu lớn (~37 MB) chứa 24 chuỗi chuyển động động học.</td></tr>
+      <tr><td><a href="datasets/candidate_reference.npz">datasets/candidate_reference.npz</a></td><td>NumPy</td><td>Bộ dữ liệu 36 mẫu ứng viên phanh đơn bước.</td></tr>
+      <tr><td><a href="delivery_manifest.json">delivery_manifest.json</a></td><td>JSON</td><td>Bảng mã băm SHA-256 niêm phong toàn vẹn của tất cả các file.</td></tr>
+      <tr><td><a href="contact_patch.png">contact_patch.png</a></td><td>Hình ảnh</td><td>Sơ đồ vệt tiếp xúc lốp 1D và các dạng phân bố tải.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+</body>
+</html>

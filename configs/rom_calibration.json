@@ -1,0 +1,8 @@
+{
+  "kappa": 1.2091615432896616,
+  "objective_train_MSE_over_Fz2": 0.0009723426930009866,
+  "training_cases": 3,
+  "heldout_cases": 2,
+  "target_pressure": "trapezoid",
+  "not_MCU_benchmark": true
+}
