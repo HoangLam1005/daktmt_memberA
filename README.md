@@ -35,6 +35,78 @@ z_next = result['next_tire_state']  # commit only for the command actually appli
 
 Tất cả vận tốc/tải trong ví dụ là benchmark khai báo. Bản này không chứa PINN, vehicle plant hoặc firmware MCU. Bộ số không phải tham số robot được đo. G2 tái dựng ca nguồn chưa có sai số so hình số hóa; G3 chưa có dữ liệu thực nghiệm. Audit mã cũ và xe C được hoãn theo xác nhận của người dùng vì chưa có mã nguồn.
 
+## Cấu trúc thư mục
+
+```text
+daktmt_memberA/
+├── configs/                                 # Cấu hình hệ thống và bảng tham số chuẩn
+│   ├── delivery_manifest.json               # Manifest niêm phong gói bàn giao
+│   ├── environment.json                     # Thông tin môi trường thực thi
+│   ├── parameter_registry.csv               # Bảng 43 tham số vật lý chuẩn (Single Source of Truth)
+│   ├── parameter_registry.json              # Bản JSON của bảng tham số
+│   ├── parameter_registry.xlsx              # Bản Excel của bảng tham số
+│   ├── parameter_registry.xlsx.inspect.ndjson
+│   └── rom_calibration.json                 # Kết quả hiệu chuẩn mô hình bậc rút gọn ROM
+├── core/                                    # Mô hình vật lý và bộ giải thuật toán lõi
+│   ├── independent_solver.py                # Bộ giải số độc lập (MOL + SciPy BDF) đối chiếu G1
+│   ├── parameters.py                        # Cấu trúc dữ liệu và nạp tham số mô hình
+│   ├── pressure.py                          # Mô hình 3 họ phân bố áp suất (Uniform, Trapezoid, Quartic)
+│   ├── reference_solver.py                  # Bộ giải tham chiếu MoC Semi-Lagrangian chính xác cao
+│   ├── rom.py                               # Mô hình bậc rút gọn (Reduced-Order Model)
+│   └── wheel_interface.py                   # Giao diện động lực học quay bánh xe & cơ cấu phanh
+├── datasets/                                # Bộ dữ liệu tham chiếu chuẩn Ground Truth
+│   ├── candidate_metadata.json              # Siêu dữ liệu tập ứng viên
+│   ├── candidate_reference.npz              # Dữ liệu nghiệm ứng viên
+│   ├── kinematic_configs.json               # Cấu hình 24 kịch bản động học chuyển động
+│   ├── manifest.json                        # Manifest tập dữ liệu
+│   ├── pilot_reference.npz                  # Dữ liệu tham chiếu pilot (~37.2 MB) cho Member B
+│   └── quality_checks.json                  # Kết quả kiểm tra chất lượng & chặn sai số dữ liệu
+├── docs/                                    # Tài liệu đặc tả kỹ thuật, bàn giao và báo cáo
+│   ├── data_schema.md                       # Đặc tả cấu trúc dữ liệu NPZ
+│   ├── handoff_A.md                         # Biên bản bàn giao kỹ thuật cho Member B, C, D
+│   ├── member_C_integration.md              # Hướng dẫn chi tiết ghép nối với Member C
+│   ├── model_spec.md                        # Đặc tả toán học & vật lý nền tảng (hệ PT A1–A9)
+│   ├── reference_verification_report.md     # Báo cáo thẩm định kỹ thuật số nghiệm thu G0–G3
+│   ├── section_II_B.md                      # Bản thảo thuyết minh mục II.B
+│   ├── section_III_A_physics.md             # Bản thảo thuyết minh mục III.A
+│   ├── section_V_A_verification.md          # Bản thảo thuyết minh mục V.A
+│   └── source_audit.md                      # Báo cáo rà soát và đối chiếu nguồn tài liệu
+├── figures/                                 # Đồ thị và hình vẽ khoa học sinh tự động
+│   ├── contact_patch.png                    # Hình dạng vệt tiếp xúc và phân bố áp suất
+│   ├── convergence.png                      # Đồ thị hội tụ không gian & thời gian
+│   ├── literature_deur_fig4_reconstruction.png # Tái dựng kết quả từ tài liệu Deur (2001)
+│   ├── memory_ablation.png                  # Phân tích hiệu ứng nhớ (Memory ablation)
+│   ├── pilot_forces.png                     # Đồ thị đáp ứng lực dọc/ngang của dữ liệu pilot
+│   └── pressure_ablation.png                # So sánh sai số giữa các họ phân bố áp suất
+├── results/                                 # Kết quả tính toán số học, đo đạc sai số và log
+│   ├── convergence_space.csv                # Dữ liệu khảo sát hội tụ theo lưới không gian
+│   ├── convergence_time.csv                 # Dữ liệu khảo sát hội tụ theo bước thời gian
+│   ├── delivery_validation.json             # Kết quả nghiệm thu tính toàn vẹn và chuẩn hóa
+│   ├── independent_comparison.csv          # So sánh sai số MoC với bộ giải độc lập
+│   ├── literature_reconstruction.csv       # Số liệu tái dựng từ công bố Deur
+│   ├── literature_reconstruction.npz       # File dữ liệu tái dựng Deur
+│   ├── memory_ablation.npz                 # Dữ liệu phân tích memory ablation
+│   ├── pressure_ablation.csv               # Bảng số liệu ảnh hưởng của phân bố áp suất
+│   ├── pressure_normalization.csv          # Kiểm tra bảo toàn tải trọng đứng Fz
+│   ├── rom_evaluation.csv                  # Đánh giá độ chính xác và tốc độ của ROM
+│   ├── sensitivity.csv                     # Phân tích độ nhạy tham số
+│   ├── unit_tests.log                      # Nhật ký thực thi 14 bài unit test
+│   ├── verification_metrics.json           # Tổng hợp chỉ số thẩm định G0–G3
+│   └── wheel_convergence.csv               # Dữ liệu hội tụ tích phân bánh xe
+├── scripts/                                 # Kịch bản thực thi pipeline tự động hóa
+│   ├── build_registry.py                   # Xuất/tái tạo registry từ nguồn khai báo
+│   ├── build_report.py                     # Tổng hợp kết quả thành file báo cáo markdown
+│   ├── generate_reference.py               # Sinh tập dữ liệu tham chiếu pilot
+│   ├── make_figures.py                     # Vẽ toàn bộ biểu đồ khoa học
+│   ├── reference_tests.py                  # Bộ 14 bài unit test kiểm định solver và công thức
+│   ├── validate_delivery.py                # Kiểm thử tự động tính toàn vẹn gói bàn giao
+│   └── verification.py                     # Kịch bản kiểm chứng hội tụ, nhạy và độc lập
+├── README.md                                # Tài liệu hướng dẫn tổng quan gói bàn giao
+├── requirements.txt                         # Danh sách thư viện phụ thuộc Python
+├── run_all.py                               # Master Pipeline Runner tự động chạy toàn bộ quy trình
+└── START_HERE.html                          # Sổ tay tương tác tra cứu tổng quan trên trình duyệt
+```
+
 ## Bảng tổng hợp các file cốt lõi
 
 | STT | Tệp tin cốt lõi | Định dạng | Vai trò chính trong gói bàn giao |
